@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Card</title>
+</head>
+<body>
+<form action="{{url_for('card_add_form')}}" method="post">
+    <input type="text" placeholder="Enter a title" name="title"/>
+    <input type="text" placeholder="Enter a description" name="description"/>
+    <select name="category">
+       {% for category in categories %}
+           <option value="{{category.category_id}}">{{category.category_id}}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Add card</button>
+</form>
+</body>
+</html>
