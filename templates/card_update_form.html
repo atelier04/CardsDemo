@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<form action="{{url_for('card_update_form',card_id=card.card_id)}}" method="post" enctype="multipart/form-data">
+    <div class="form-group mb-4">
+        <input value="{{card.title}}" class="form-control" type="text" placeholder="Enter a title" name="title"/>
+
+    </div>
+    <div class="form-group mb-4">
+        <input value="{{card.description}}" class="form-control" type="text" placeholder="Enter a description" name="description"/>
+    </div>
+
+     {% if card.image_file %}
+
+         <p style="text-align:center;color:red;font-size:24px">
+             original file: {{card.card_id}}.png</p>
+         {% endif %}
+     <div class="form-group mb-4">
+         {% if card.image_file %}
+         {{card.image_file.filename}}
+         {% endif %}
+        <input class="form-control" type="file"  name="file" />
+     </div>
+     <div class="form-group mb-4">
+         <select  class="form-select " name="category">
+       {% for category in categories %}
+           <option value="{{category.category_id}}" {{ 'selected' if category.category_id == card.category_id else '' }} >{{category.category_id}}</option>
+        {% endfor %}
+    </select>
+     </div>
+     <div class="form-group mt-4" >
+    <button class="btn btn-primary" type="submit">Update card</button>
+     </div>
+</form>
+{% endblock %}

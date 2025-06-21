@@ -1,11 +1,14 @@
+import base64
 from datetime import datetime
+from io import BytesIO
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, send_file
 from flask_sqlalchemy import SQLAlchemy
 from dbconfig import DB_URI
-from sqlalchemy import Column, Integer, DATETIME,BINARY, String, UnicodeText, create_engine, or_
+from sqlalchemy import Column, Integer, DATETIME, BINARY, String, UnicodeText, create_engine, or_
 from sqlalchemy.orm import relationship, session, sessionmaker
 import json
+from PIL import Image
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
@@ -20,8 +23,8 @@ class Card(db.Model):
     title = Column(db.String, name="title", nullable=False)
     description = Column(db.String, name="description", nullable=False)
     created_at = Column(db.DateTime, default=datetime.now())
-
-    category_id = Column(db.Integer, db.ForeignKey("category.category_id"), name="category_id", )
+    image_file = Column(db.LargeBinary, nullable=True, name="image_file")
+    category_id = Column(db.Integer, db.ForeignKey("category.category_id"), name="category_id")
 
     def __repr__(self):
         return f"{self.title} {self.description} {self.created_at}"
@@ -39,6 +42,7 @@ class Category(db.Model):
     title = Column(db.String, name="title", nullable=False)
     description = Column(db.String, name="description", nullable=False)
     created_at = Column(db.DateTime, name="created_at", nullable=False)
+
     cards = relationship("Card")
 
     def __repr__(self):
@@ -82,7 +86,16 @@ def get_cards():
         print(f"in get_cards {type(cards)=}")
         print(f"in get_cards {cards=}")
     else:
-        cards = Card.query.all()
+        cards: list[Card] = Card.query.all()
+        for index, card in enumerate(cards):
+            if card.image_file is not None:
+                file_img = cards[index].image_file
+
+                img: Image = Image.open(BytesIO(file_img))
+                card_image_id = str(cards[index].card_id)
+                img.save(f"static/img/{cards[index].card_id}.png")
+    # return send_file(BytesIO(file_img),as_attachment=True,download_name="test.png")
+
     return render_template("cards.html", cards=cards)
 
 
@@ -106,7 +119,12 @@ def card_add_form():
         description = request.form.get("description")
         card: Card = Card(title=title, description=description, created_at=datetime.now())
         category_id = request.form.get("category")
+
         print(f"{category_id=}")
+        image_file = request.files.get("file")
+        print(image_file.name, image_file.filename)
+        card.image_file = image_file.read()
+        print(f"{image_file=}")
         category: Category = Category.query.filter(Category.category_id == category_id).first()
         category.cards.append(card)
         db.session.add(card)
@@ -121,7 +139,35 @@ def card_add_form():
 @app.get("/cards/<int:card_id>")
 def get_card(card_id):
     card_return = Card.query.filter(Card.card_id == card_id).first()
-    return f"{card_return}"
+    return render_template("card.html", card=card_return)
+
+
+@app.get("/cards/delete/<int:card_id>")
+def delete_card(card_id):
+    card_return = Card.query.filter(Card.card_id == card_id).first()
+    db.session.delete(card_return)
+    db.session.commit()
+    return redirect(url_for('get_cards'))
+
+
+@app.route("/cards/update/<int:card_id>", methods=['GET', 'POST'])
+def card_update_form(card_id):
+    if request.method == "GET":
+        card_return = Card.query.filter(Card.card_id == card_id).first()
+        categories = Category.query.all()
+        return render_template("card_update_form.html", card=card_return, categories=categories)
+    else:
+        title = request.form.get("title")
+        description = request.form.get("description")
+        category_id = request.form.get("category")
+        card_return = Card.query.filter(Card.card_id == card_id).first()
+        card_return.title = title
+        card_return.description = description
+        card_return.category_id = category_id
+        if request.files.get("file") is not None:
+            card_return.image_file = request.files.get("file").read()
+        db.session.commit()
+        return redirect(url_for('get_cards'))
 
 
 @app.route("/cards/add_category", methods=['GET', 'POST'])

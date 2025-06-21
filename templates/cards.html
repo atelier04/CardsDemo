@@ -11,18 +11,25 @@
    <div style="display:grid;grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) ">
    {% for card in cards %}
        <div class="border p-2  fw-medium">
-            <div class="d-flex flex-column justify-content-center">
+            <div class="d-flex flex-column align-items-center justify-content-center">
                 <div class="mb-2"> {{card.card_id}}</div>
                   <div class="mb-2"> {{card.title}}</div>
                     <div class="mb-2" >  {{card.description}}</div>
                     <div class="mb-2" >{{card.created_at}}</div>
-                     <div class="mb-2" > {{card.category_id}}</div>
-                    <div class="d-flex flex-row justify-content-between ">
-                    <div ><button type="submit" class="btn btn-success">Update</button></div>
-                    <div ><button type="submit" class="btn btn-danger">Delete</button></div>
-                    <div><button type="submit" class="btn btn-secondary">Show</button></div>
+                     {% if card.image_file %}
+
+                     <div class="mb-2">
+                     <img width="50" height="50" src="{{ url_for('static', filename='img/' + card.card_id|string + '.png') }}">
                      </div>
-                    </div>
+                    {% endif %}
+                    <div class="mb-2" > {{card.category_id}}</div>
+
+            </div>
+            <div class="d-flex flex-row justify-content-between ">
+                <div ><form action="{{url_for('card_update_form',card_id=card.card_id)}}"><button type="submit" class="btn btn-success">Update</button></form></div>
+                <div ><form action="{{url_for('delete_card',card_id=card.card_id)}}"><button type="submit" class="btn btn-danger">Delete</button></form></div>
+                    <div><form action="{{url_for('get_card',card_id=card.card_id)}}"><button type="submit" class="btn btn-secondary">Show</button></form></div>
+                     </div>
        </div>
     {% endfor %}
        </div>
