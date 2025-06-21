@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from dbconfig import DB_URI
-from sqlalchemy import Column, Integer, DATETIME, String, UnicodeText, create_engine, or_
+from sqlalchemy import Column, Integer, DATETIME,BINARY, String, UnicodeText, create_engine, or_
 from sqlalchemy.orm import relationship, session, sessionmaker
 import json
 
@@ -20,6 +20,7 @@ class Card(db.Model):
     title = Column(db.String, name="title", nullable=False)
     description = Column(db.String, name="description", nullable=False)
     created_at = Column(db.DateTime, default=datetime.now())
+
     category_id = Column(db.Integer, db.ForeignKey("category.category_id"), name="category_id", )
 
     def __repr__(self):
