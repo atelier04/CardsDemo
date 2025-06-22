@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="941e255b-8e15-4e54-8f2a-97705d52671b" name="Changes" comment="Search , list Cards, add Card, add Category">
-      <change afterPath="$PROJECT_DIR$/.idea/CardsDemo.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="941e255b-8e15-4e54-8f2a-97705d52671b" name="Changes" comment="Add and Update Form, file up and download , selected value chosen in dropdown, update and delete function">
+      <change beforePath="$PROJECT_DIR$/.idea/CardsDemo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CardsDemo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cards.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cards.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +17,6 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
       </list>
     </option>
@@ -31,9 +25,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 7
+  &quot;associatedIndex&quot;: 0
 }</component>
-  <component name="ProjectId" id="2ybepN8nvdAtRJjmCymhD2bz7dZ" />
+  <component name="ProjectId" id="2yoPAJTEia8UyK7Dfjwa4PQcWaE" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -46,30 +40,32 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Anwender/PycharmProjects/CardDemo/CardsDemo/static/css&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Anwender\PycharmProjects\CardDemo\CardsDemo\static\js" />
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Anwender\PycharmProjects\CardDemo\CardsDemo\static\css" />
-      <recent name="C:\Users\Anwender\PycharmProjects\CardDemo\CardsDemo" />
+      <recent name="C:\Users\Anwender\PycharmProjects\CardDemo\CardsDemo\static\js" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="CardsDemo" />
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="FLASK_APP" value="main.py" />
       </envs>
       <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -79,6 +75,11 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -90,37 +91,21 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="941e255b-8e15-4e54-8f2a-97705d52671b" name="Changes" comment="" />
-      <created>1750107881454</created>
+      <changelist id="941e255b-8e15-4e54-8f2a-97705d52671b" name="Changes" comment="Change of cards.html, all card features are in one grid cell" />
+      <created>1750497809955</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1750107881454</updated>
+      <updated>1750497809955</updated>
     </task>
-    <task id="LOCAL-00001" summary="Flask connected with SQLAlchemy(postgresql)">
+    <task id="LOCAL-00001" summary="Add and Update Form, file up and download , selected value chosen in dropdown, update and delete function">
       <option name="closed" value="true" />
-      <created>1750114386532</created>
+      <created>1750544149576</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1750114386532</updated>
+      <updated>1750544149576</updated>
     </task>
-    <task id="LOCAL-00002" summary="Category  made and connected to Card">
-      <option name="closed" value="true" />
-      <created>1750266056061</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1750266056061</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Search , list Cards, add Card, add Category">
-      <option name="closed" value="true" />
-      <created>1750343792492</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1750343792492</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -135,9 +120,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Flask connected with SQLAlchemy(postgresql)" />
-    <MESSAGE value="Category  made and connected to Card" />
-    <MESSAGE value="Search , list Cards, add Card, add Category" />
-    <option name="LAST_COMMIT_MESSAGE" value="Search , list Cards, add Card, add Category" />
+    <MESSAGE value="Add and Update Form, file up and download , selected value chosen in dropdown, update and delete function" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add and Update Form, file up and download , selected value chosen in dropdown, update and delete function" />
   </component>
 </project>

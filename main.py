@@ -1,4 +1,5 @@
 import base64
+import logging
 from datetime import datetime
 from io import BytesIO
 
@@ -8,7 +9,7 @@ from dbconfig import DB_URI
 from sqlalchemy import Column, Integer, DATETIME, BINARY, String, UnicodeText, create_engine, or_
 from sqlalchemy.orm import relationship, session, sessionmaker
 import json
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
@@ -16,6 +17,7 @@ db: SQLAlchemy = SQLAlchemy()
 db.init_app(app)
 engine = create_engine(DB_URI)
 Session = sessionmaker(bind=engine)
+logger=logging.getLogger(__name__)
 
 
 class Card(db.Model):
@@ -89,11 +91,15 @@ def get_cards():
         cards: list[Card] = Card.query.all()
         for index, card in enumerate(cards):
             if card.image_file is not None:
-                file_img = cards[index].image_file
-
-                img: Image = Image.open(BytesIO(file_img))
-                card_image_id = str(cards[index].card_id)
-                img.save(f"static/img/{cards[index].card_id}.png")
+                try:
+                    file_img = cards[index].image_file
+                    img: Image = Image.open(BytesIO(file_img))
+                    card_image_id = str(cards[index].card_id)
+                    img.save(f"static/img/{cards[index].card_id}.png")
+                except UnidentifiedImageError:
+                    logger.error(f"Could not identify image for card_id={card.card_id}")
+                except Exception as e:
+                    logger.error(f"Unexpected error for card_id={card.card_id}: {e}")
     # return send_file(BytesIO(file_img),as_attachment=True,download_name="test.png")
 
     return render_template("cards.html", cards=cards)
