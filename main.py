@@ -17,7 +17,7 @@ db: SQLAlchemy = SQLAlchemy()
 db.init_app(app)
 engine = create_engine(DB_URI)
 Session = sessionmaker(bind=engine)
-logger=logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 class Card(db.Model):
@@ -142,9 +142,15 @@ def card_add_form():
         return render_template("card_add_form.html", categories=categories)
 
 
+import qrcode
+
+
 @app.get("/cards/<int:card_id>")
 def get_card(card_id):
     card_return = Card.query.filter(Card.card_id == card_id).first()
+    if card_return.image_file is not None:
+        img: Image = qrcode.make(f"{card_return.card_id}.png")
+        img.save(f"static/img/{card_return.card_id}qrcode.png")
     return render_template("card.html", card=card_return)
 
 

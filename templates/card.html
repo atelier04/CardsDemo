@@ -6,7 +6,8 @@
 {% if card.image_file %}
      <div>
 <img class="mb-4 mt-4" width="200" height="200" src="{{ url_for('static', filename='img/' + card.card_id|string + '.png') }}"/>
-{% endif %}
+ <img class="mb-4 mt-4" width="200" height="200" src="{{ url_for('static', filename='img/' + card.card_id|string + 'qrcode.png') }}"/>
+         {% endif %}
  </div>
 <div>{{card.card_id}}</div>
 <div>{{card.title}}</div>
