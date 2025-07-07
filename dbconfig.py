@@ -1,6 +1,6 @@
-DB_HOST = "localhost"
+DB_HOST = "0.0.0.0"
 DB_USER = "postgres"
 DB_PASSWORD = "testen"
 DB_NAME = "shop"
-DB_URI = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
-
+#DB_URI = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
+DB_URI =f"postgresql://shop_7ac1_user:BDwRJh7I8tAxPELYtI9H1Or0XsEqtamR@dpg-d1m4gaer433s739hqec0-a/shop_7ac1"
